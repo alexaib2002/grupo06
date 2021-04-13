@@ -1,2 +1,7 @@
 # grupo06
-Proyecto IFP
+Repositorio de trabajo del Grupo 06
+
+Miembros del grupo de trabajo:
+- Alejandro Aibar
+- Jose Manuel Álvarez Polo
+- Alejandro Edison 
