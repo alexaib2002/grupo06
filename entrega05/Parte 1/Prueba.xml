@@ -1,0 +1,531 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+<block type="file" x="132" y="87">
+<field name="name">Prueba</field>
+<value name="version_file">
+	    <block type="version">		
+	    <field name="symbolversion">&gt;=</field>
+	    <field name="value1version">0</field>
+	    <field name="value2version">4</field>
+	    <field name="value3version">22</field>
+	    <field name="symbolcomparation">&lt;=</field>
+	    <field name="value1versionoptional">0</field>
+	    <field name="value2versionoptional">7</field>
+	    <field name="value3versionoptional">0</field>
+	    </block>		
+</value>
+<statement name="elements_file">
+        	<block type="contract">
+        	<field name="name">SimpleAuction</field>
+        	<statement name="contract_elements">  
+        	<block type="address_shortproperty">
+        	<field name="addresstype_values">address payable</field>
+        	<field name="name">beneficiary</field>
+        	<next>
+        	<block type="number_shortproperty">
+        	<field name="numbertype_property">uint</field>
+        	<field name="name">auctionEndTime</field>
+        	<next>
+        	<block type="boolean_shortproperty">
+        	<field name="name">ended</field>
+        	        <value name="valueproperty">
+        	        	<block type="assing_value_expression1inputs"> 
+        	        		<field name="operators">=</field>
+        	        		<value name="value1_assingexpression">
+        	        	      	<block type="block_boolean">
+        	        	      		<field name="values">false</field>
+        	        	      	</block>
+        	        		</value>
+        	        	</block>
+        	        </value>
+        	<next>
+        	<block type="mapping_shortproperty">
+        	<value name="key">
+        	<block type="type_address" >
+        	   <field name="address_options">address</field>
+        	 </block>
+        	</value>
+        	<value name="value">
+        	<block type="type_bool">
+        	   <field name="bool_options">bool</field>
+        	 </block>
+        	</value>
+        	<value name="array_dimension">
+        	<block type="dynamic_array">
+        	  </block>
+        	</value>
+        	<field name="name">ended</field>
+        	<next>
+        				<block type="contract_constructor">
+        		<field name="visibility_values">public</field>
+        		<field name="payable">FALSE</field>
+        		<statement name="expressions_constructor">
+        		<block type="assign_value_expression">
+        		<field name="operators">=</field>
+        		<value name="value1_assignexpression">
+        		<block type="personalized_inputexpression">
+        			<field name="values_expression">beneficiary</field>
+        		</block>
+        		</value>
+        		<value name="value2_assignexpression">
+        		<block type="personalized_inputexpression">
+        			<field name="values_expression">_beneficiary</field>
+        		</block>
+        		</value>		
+        					<next>
+        		<block type="assign_value_expression">
+        		<field name="operators">=</field>
+        		<value name="value1_assignexpression">
+        		<block type="personalized_inputexpression">
+        			<field name="values_expression">auctionEndTime</field>
+        		</block>
+        		</value>
+        		<value name="value2_assignexpression">
+        		<block type="arithmetical_expression">
+        		 <field name="operators">+</field>
+        		   <value name="value1_arithmeticalexpression">
+        		  	<block type="block_now"/>
+        		   </value>
+        		   <value name="value2_arithmeticalexpression">
+        		     <block type="personalized_inputexpression">
+        		     	<field name="values_expression">_biddingTime</field>
+        		     </block>
+        		   </value>
+        		</block>
+        		</value>		
+        		</block>
+        		  </next>
+        		</block>
+        		</statement>
+        	<next>
+        				<block type="modifier">
+        		<field name="name">condition</field>
+        		<value name="inputparams">
+        		<block type="inputparam">
+        		     <statement name="inputparams">
+        		<block type="inputparamshortidentifier">
+        		<field name="name">_condition</field>
+        		     <value name="type">
+        		      <block type="type_bool">
+        		         <field name="bool_options">bool</field>
+        		       </block>
+        		     </value>
+        		</block>
+        		 </statement>
+        		</block>		
+        		</value>
+        		<statement name="restrictions_modifier">
+        		 	<block type="restriction_clause">
+        		    <value name="condition">
+        		      <block type="personalized_inputexpression">
+        		      	<field name="values_expression">_condition</field>
+        		      </block>
+        		    </value>
+        		<next>
+        		<block type="closemodifier"/>
+        		</next>
+        		    				</block>
+        		</statement>
+        	<next>
+        			<block type="modifier">
+        		<field name="name">onlyBuyer</field>
+        		<value name="inputparams">
+        		</value>
+        		<statement name="restrictions_modifier">
+        		<block type="restriction_clausecomment">
+        		<field name="comment">"Only buyer can call this."</field>	
+        		<value name="condition">
+        				    	  <block type="comparation_expression">
+        		<field name="operators">==</field>
+        		<value name="value1_expression">
+        			      <block type="msgvariables">
+        			        <field name="msgvariables">msg.sender</field>
+        			      </block>
+        			    </value>
+        			    <value name="value2_expression">
+        			      <block type="personalized_inputexpression">
+        			      	<field name="values_expression">buyer</field>
+        			      </block>
+        			    </value>
+        			  </block>
+        		</value>	 		
+        		<next>
+        		<block type="closemodifier"/>
+        		</next>
+        		    				</block>
+        		</statement>
+        	<next>
+        				<block type="event">
+        		<field name="name">HighestBidIncreased</field>
+        		<value name="inputparams">
+        		 <block type="inputparam">
+        		      <statement name="inputparams">
+        		 <block type="inputparamshortidentifier">
+        		 <field name="name">bidder</field>
+        		      <value name="type">
+        		       <block type="type_address" >
+        		          <field name="address_options">address </field>
+        		        </block>
+        		      </value>
+        		     	   		<next>
+        		 <block type="inputparamshortidentifier">
+        		 <field name="name">amount</field>
+        		      <value name="type">
+        		       		  <block type="type_uint">
+        		       <field name="uint_options">uint</field>
+        		       		  </block>
+        		      </value>
+        		 </block>
+        		 	  </next>
+        		 	</block>
+        		  </statement>
+        		 </block>		
+        		</value>
+        	<next>
+        			<block type="event">
+        		<field name="name">AuctionEnded</field>
+        		<value name="inputparams">
+        		 <block type="inputparam">
+        		      <statement name="inputparams">
+        		 <block type="inputparamshortidentifier">
+        		 <field name="name">winner</field>
+        		      <value name="type">
+        		       <block type="type_address" >
+        		          <field name="address_options">address </field>
+        		        </block>
+        		      </value>
+        		     	   		<next>
+        		 <block type="inputparamshortidentifier">
+        		 <field name="name">amount</field>
+        		      <value name="type">
+        		       		  <block type="type_uint">
+        		       <field name="uint_options">uint</field>
+        		       		  </block>
+        		      </value>
+        		 </block>
+        		 	  </next>
+        		 	</block>
+        		  </statement>
+        		 </block>		
+        		</value>
+        	<next>
+        	       <block type="clause">
+        	       <field name="name">bid</field>
+        	       <field name="values_visibility">public</field>
+        	        	<field name="values_inputmodifier">payable</field>
+        	       <statement name="elements_function">		
+        	       <block type="restriction_clausecomment">
+        	       <field name="comment">"Auction already ended."</field>	
+        	       <value name="condition">
+        	       		    <block type="comparation_arithmeticalexpression">
+        	               <field name="operators">&lt;=</field>
+        	       <value name="value1_arithmeticalcomparationexpression">
+        	         <block type="block_now"/>
+        	       </value>
+        	       <value name="value2_arithmeticalcomparationexpression">
+        	         <block type="personalized_inputexpression">
+        	         	<field name="values_expression">auctionEndTime</field>
+        	         </block>
+        	       </value>   
+        	       </block>
+        	       </value>	 		
+        	       <next>
+        	       <block type="restriction_clausecomment">
+        	       <field name="comment">"There already is a higher bid."</field>	
+        	       <value name="condition">
+        	       		    <block type="comparation_arithmeticalexpression">
+        	               <field name="operators">&gt;</field>
+        	       <value name="value1_arithmeticalcomparationexpression">
+        	         <block type="msgvariables">
+        	           <field name="msgvariables">msg.value</field>
+        	         </block>
+        	       </value>
+        	       <value name="value2_arithmeticalcomparationexpression">
+        	         <block type="personalized_inputexpression">
+        	         	<field name="values_expression">highestBid</field>
+        	         </block>
+        	       </value>   
+        	       </block>
+        	       </value>	 		
+        	       <next>
+        	       <block type="block_ifcondition">
+        	           <value name="condition">
+        	             	  <block type="comparation_expression">
+        	             <field name="operators">!=</field>
+        	             <value name="value1_expression">
+        	             	      <block type="personalized_inputexpression">
+        	             	      	<field name="values_expression">highestBid</field>
+        	             	      </block>
+        	             	    </value>
+        	             	    <value name="value2_expression">
+        	             	      <block type="personalized_inputexpression">
+        	             	      	<field name="values_expression">0</field>
+        	             	      </block>
+        	             	    </value>
+        	             	  </block>
+        	           </value>
+        	           <statement name="actionsif">
+        	             <block type="assign_value_expression">
+        	             <field name="operators">+=</field>
+        	             <value name="value1_assignexpression">
+        	             <block type="personalized_inputexpression">
+        	             	<field name="values_expression">pendingReturns[highestBidder]</field>
+        	             </block>
+        	             </value>
+        	             <value name="value2_assignexpression">
+        	             <block type="personalized_inputexpression">
+        	             	<field name="values_expression">highestBid</field>
+        	             </block>
+        	             </value>		
+        	             </block>
+        	             		      		      		      		    </statement>
+        	       <next>
+        	       <block type="emit_event">
+        	       <field name="name">HighestBidIncreased</field>
+        	        <value name="inputparams">
+        	        <block type="inputparam">
+        	             <statement name="inputparams">
+        	        <block type="inputparamshortidentifier">
+        	        <field name="name">msg.sender</field>
+        	            	   		<next>
+        	        <block type="inputparamshortidentifier">
+        	        <field name="name">msg.value</field>
+        	        </block>
+        	        	  </next>
+        	        	</block>
+        	         </statement>
+        	        </block>		
+        	        </value>
+        	       <next>
+        	       <block type="assign_value_expression">
+        	       <field name="operators">=</field>
+        	       <value name="value1_assignexpression">
+        	       <block type="personalized_inputexpression">
+        	       	<field name="values_expression">highestBider</field>
+        	       </block>
+        	       </value>
+        	       <value name="value2_assignexpression">
+        	       <block type="msgvariables">
+        	         <field name="msgvariables">msg.sender</field>
+        	       </block>
+        	       </value>		
+        	       			<next>
+        	       <block type="assign_value_expression">
+        	       <field name="operators">=</field>
+        	       <value name="value1_assignexpression">
+        	       <block type="personalized_inputexpression">
+        	       	<field name="values_expression">highestBid</field>
+        	       </block>
+        	       </value>
+        	       <value name="value2_assignexpression">
+        	       <block type="msgvariables">
+        	         <field name="msgvariables">msg.value</field>
+        	       </block>
+        	       </value>		
+        	       </block>
+        	         </next>
+        	       </block>
+        	       			 </next>
+        	       	</block>
+        	       			 </next>
+        	       	</block>
+        	        </next>
+        	       </block>
+        	        </next>
+        	       </block>
+        	       </statement>
+        	 	   	<next>
+        	       <block type="clause">
+        	       <field name="name">withdraw</field>
+        	       <field name="values_visibility">public</field>
+        	        	<field name="values_inputmodifier">view</field>
+        	       	<value name="returns_values">
+        	       <block type="outputparam">
+        	         <field name="name">xio</field>
+        	         <value name="outputparam">
+        	            		  <block type="type_int">
+        	            <field name="int_options">int</field>
+        	            		   </block>
+        	         </value>
+        	       </block>		
+        	       </value>
+        	       <statement name="elements_function">		
+        	       <block type="number_shortproperty">
+        	       <field name="numbertype_property">uint</field>
+        	       <field name="name">amount</field>
+        	               <value name="valueproperty">
+        	               	<block type="assing_value_expression1inputs"> 
+        	               		<field name="operators">=</field>
+        	               		<value name="value1_assingexpression">
+        	               	      	<block type="personalized_inputexpression">
+        	               	      		<field name="values_expression">pendingReturns[msg.sender]</field>
+        	               	      	</block>
+        	               		</value>
+        	               	</block>
+        	               </value>
+        	       <next>
+        	       <block type="block_ifcondition">
+        	           <value name="condition">
+        	             <block type="comparation_arithmeticalexpression">
+        	                     <field name="operators">&gt;</field>
+        	             <value name="value1_arithmeticalcomparationexpression">
+        	               <block type="personalized_inputexpression">
+        	               	<field name="values_expression">amount</field>
+        	               </block>
+        	             </value>
+        	             <value name="value2_arithmeticalcomparationexpression">
+        	               <block type="personalized_inputexpression">
+        	               	<field name="values_expression">0</field>
+        	               </block>
+        	             </value>   
+        	             </block>
+        	           </value>
+        	           <statement name="actionsif">
+        	       <block type="block_ifcondition">
+        	           <value name="condition">
+        	             <block type="block_negation">
+        	               <value name="value">
+        	             	<block type="personalized_inputexpression">
+        	             		<field name="values_expression">msg.sender.send(amount)</field>
+        	             	</block>
+        	             		  </value>
+        	             </block>
+        	           </value>
+        	           <statement name="actionsif">
+        	             <block type="assign_value_expression">
+        	             <field name="operators">=</field>
+        	             <value name="value1_assignexpression">
+        	             <block type="personalized_inputexpression">
+        	             	<field name="values_expression">pendingReturns[msg.sender]</field>
+        	             </block>
+        	             </value>
+        	             <value name="value2_assignexpression">
+        	             <block type="personalized_inputexpression">
+        	             	<field name="values_expression">0</field>
+        	             </block>
+        	             </value>		
+        	             			<next>
+        	             <block type="return_clause">
+        	             		  <value name="values">
+        	             		   <block type="block_boolean">
+        	             		   	<field name="values">false</field>
+        	             		   </block>
+        	             		  </value>
+        	             </block>
+        	               </next>
+        	             </block>
+        	             		      		      		      		    </statement>
+        	             		      			</block>
+        	             		      		      		    </statement>
+        	       <next>
+        	       <block type="return_clause">
+        	       		  <value name="values">
+        	       		   <block type="block_boolean">
+        	       		   	<field name="values">true</field>
+        	       		   </block>
+        	       		  </value>
+        	       </block>
+        	       			 </next>
+        	       	</block>
+        	       			 </next>
+        	       	</block>
+        	       </statement>
+        	 	   	<next>
+        	       <block type="clause">
+        	       <field name="name">auctionEnd</field>
+        	       <field name="values_visibility">public</field>
+        	        	<field name="values_inputmodifier">view</field>
+        	       <statement name="elements_function">		
+        	       <block type="restriction_clausecomment">
+        	       <field name="comment">"Auction not yet ended."</field>	
+        	       <value name="condition">
+        	       		    <block type="comparation_arithmeticalexpression">
+        	               <field name="operators">&gt;=</field>
+        	       <value name="value1_arithmeticalcomparationexpression">
+        	         <block type="block_now"/>
+        	       </value>
+        	       <value name="value2_arithmeticalcomparationexpression">
+        	         <block type="personalized_inputexpression">
+        	         	<field name="values_expression">auctionEndTime</field>
+        	         </block>
+        	       </value>   
+        	       </block>
+        	       </value>	 		
+        	       <next>
+        	            <block type="restriction_clausecomment">
+        	           <value name="condition">
+        	             <block type="personalized_inputexpression">
+        	             	<field name="values_expression">ended</field>
+        	             </block>
+        	           </value>
+        	           <field name="comment">"AuctionEnd has already been called."</field>
+        	       <next>
+        	       <block type="emit_event">
+        	       <field name="name">AuctionEnded</field>
+        	        <value name="inputparams">
+        	        <block type="inputparam">
+        	             <statement name="inputparams">
+        	        <block type="inputparamshortidentifier">
+        	        <field name="name">highestBidder</field>
+        	            	   		<next>
+        	        <block type="inputparamshortidentifier">
+        	        <field name="name">highestBid</field>
+        	        </block>
+        	        	  </next>
+        	        	</block>
+        	         </statement>
+        	        </block>		
+        	        </value>
+        	       <next>
+        	       <block type="assign_value_expression">
+        	       <field name="operators">=</field>
+        	       <value name="value1_assignexpression">
+        	       <block type="personalized_inputexpression">
+        	       	<field name="values_expression">ended</field>
+        	       </block>
+        	       </value>
+        	       <value name="value2_assignexpression">
+        	       <block type="block_boolean">
+        	       	<field name="values">true</field>
+        	       </block>
+        	       </value>		
+        	       			<next>
+        	       <block type="personalized_expression">
+        	         <field name="values_expression">beneficiary.transfer(highestBid)</field>
+        	       </block>
+        	         </next>
+        	       </block>
+        	       			 </next>
+        	       	</block>
+        	        </next>
+        	       </block>
+        	        </next>
+        	       </block>
+        	       </statement>
+        	</block>
+        		  </next>
+        		</block>
+        		  </next>
+        		</block>
+        	 </next>
+        	</block>
+        	 </next>
+        	</block>
+        	 </next>
+        	</block>
+        	 </next>
+        	</block>
+        				 </next>
+        		</block>
+        				 </next>
+        		</block>
+        	 </next>
+        	</block>
+        	 </next>
+        	</block>
+        	 </next>
+        	</block>
+        	    </statement> 
+        	    </block>    
+        	        			    </statement>
+</block>
+</xml>

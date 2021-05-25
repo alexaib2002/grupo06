@@ -1,0 +1,50 @@
+<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+  <block type="form_block">
+    <field name="name">miformulario</field>
+    <field name="action">my-action</field>
+    <field name="method">post</field>
+    <statement name="form_conent">
+      <block type="text_area">
+        <field name="name">opinion</field>
+        <field name="form">miformulario</field>
+        <next>
+          <block type="input_block">
+            <field name="name">nombre</field>
+            <field name="value">name</field>
+            <field name="selected_type">text</field>
+            <next>
+              <block type="input_block">
+                <field name="name">miarchivo</field>
+                <field name="value">file</field>
+                <field name="selected_type">file</field>
+                <next>
+                  <block type="list_block">
+                    <field name="NAME">ul</field>
+                    <statement name="list_content">
+                      <block type="button_block">
+                        <field name="type">button</field>
+                        <field name="value">Button</field>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="button_block">
+                        <field name="type">reset</field>
+                        <field name="value">resetear</field>
+                        <next>
+                          <block type="button_block">
+                            <field name="type">submit</field>
+                            <field name="value">enviar</field>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
